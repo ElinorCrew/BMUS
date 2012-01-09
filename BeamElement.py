@@ -25,13 +25,18 @@ class BeamElement:
 			[0, -12*Y, 6*X1, 0, 12*Y, 6*X1],
 			[0, -6*X1, 2*X2, 0, 6*X1, 4*X2]
 			]
-		return setDegreesOfFreedom(localK, appendLists([self.start.degsVector, self.end.degsVector]))
+		return localCToGobalC(setDegreesOfFreedom(localK, appendLists([self.start.degsVector, self.end.degsVector]),),self.getAngel())
 
 	def getLength(self):
 		powX = pow((self.end.x - self.start.x), 2)
 		powY = pow((self.end.y - self.start.y), 2)
 		return sqrt(powX + powY)
-
+		
+	def getAngel(self):
+		powX = pow((self.end.x - self.start.x), 2)
+		powY = pow((self.end.y - self.start.y), 2)
+		return atan(powY/powX)
+		
 	def setPhysicalProperties(self, E, I, A):
 		self.E = E
 		self.I = I

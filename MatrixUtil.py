@@ -1,5 +1,6 @@
 from math import *
-#simen var her
+
+                  
 def addOneLocalK(globalK, localK, localIEG):
 	localLen = len(localK)
 	localPiv = floor(localLen/2)
@@ -23,7 +24,33 @@ def calculateSystemMatrix(IEG, beamList, numVert):
 	for i in range(len(IEG)):
 		addOneLocalK(tempK, beamList[i].getLocalK(), IEG[i])
 	return tempK
+def multiplayMatrixes(matrix1,matrix2):
 
+    if len(matrix1[0]) != len(matrix2):
+        print 'Matrices must be m*n and n*p to multiply!'
+    else:
+        new_matrix = newNullMatrix(len(matrix1))
+        for i in range(len(matrix1)):
+            for j in range(len(matrix2[0])):
+                for k in range(len(matrix2)):
+                    new_matrix[i][j] += matrix1[i][k]*matrix2[k][j]
+        return new_matrix
+	
+def localCToGobalC(localK, angel):
+	return multiplayMatrixes(localK, generateRotationMatrix_6x6(angel))
+
+
+def generateRotationMatrix_6x6(angel):
+	return  [ 
+					  [cos(angel),sin(angel),0,0,0,0],
+                      [-sin(angel),cos(angel),0,0,0,0],
+					  [0,0,1,0,0,0],
+					  [0,0,0,cos(angel),sin(angel),0],
+					  [0,0,0,-sin(angel),cos(angel),0],
+					  [0,0,0,0,0,1]
+		    ]
+ 
+ 
 def newNullMatrix(lenK):
 		newMatrix = []
 		for i in range(lenK):
