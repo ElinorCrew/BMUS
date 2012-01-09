@@ -1,3 +1,5 @@
+from DrawCanvasUtil import *
+
 class Point:
 	def __init__(self, x, y, ID):
 		self.x = x
@@ -9,6 +11,7 @@ class Point:
 		self.degsVector = [1, 1, 1]
 		
 	def draw(self, canv):
+		canv = draw_force_arrow(canv, self.x, self.y, self.x + 30*self.forceVector[1], self.y + 30*self.forceVector[2])
 		canv.create_oval(self.x-self.rad,self.y-self.rad,self.x+self.rad,self.y+self.rad,width=0,fill='grey')
 		return canv
 		
@@ -17,3 +20,6 @@ class Point:
 		
 	def getIdType(self):
 		return self.Type + str(self.ID)
+		
+	def addForce(self):
+		self.forceVector = [0, 0, -1]

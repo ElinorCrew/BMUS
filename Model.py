@@ -11,13 +11,10 @@ class Model:
 		self.elementList = []
 		self.idState = IdState()
 		self.setPointState = False
-		self.responseText = ""
 		
 	def setPoint(self, x, y):
-		self.responseText = "Mode: set new start point\n"
 		pointB = Point(x, y, self.idState.getPointId())
 		if self.setPointState and (0 != len(self.elementList)):
-			self.responseText = "Mode: set continuation point\n"
 			pointA = self.elementList.pop()
 			beamElement = BeamElement(pointA, pointB, self.idState.getBeamId())
 			self.elementList.append(beamElement)
@@ -28,16 +25,25 @@ class Model:
 	def endPoint(self):
 		self.setPointState = False
 		
-	def setForce(self):
-		self.responseText = "Mode: set force\n"
+	def setForce(self, x, y):
+		index = self.getSelectedElementIndex(x, y)
+		if index != -1 and self.elementList[index].Type == 'p':
+			self.elementList[index].addForce();
+		self.setPointState = False
 	
-	def setFixture(self):
-		self.responseText = "Mode: set boundry\n"
+	def setFixture(self, x, y):
+		self.setPointState = False
 		
 	def drawElementList(self, canv):
 		for element in self.elementList:
 			element.draw(canv)
 		return canv
+	
+	def getSelectedElementIndex(self, x, y):
+		for i in range(len(self.elementList)):
+			if self.elementList[i].isSelected(x, y):
+				return i
+		return -1
 		
 	def newCalculation(self):
 		newCalculation = Calculation(self.calculateIEG(), self.getBeamList(), self.calculateNumVert())
@@ -73,7 +79,7 @@ class Model:
 				#TODO: User set properties.
 				element.setPhysicalProperties(1, 1, 1)
 				beamList.append(element)
-		return beamList	
+		return beamList
 		
 	def getForceVector(self):
 		localForceVectors = []

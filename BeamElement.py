@@ -41,5 +41,8 @@ class BeamElement:
 		canv.create_line(self.start.x, self.start.y, self.end.x, self.end.y)
 		return canv
 		
+	def isSelected(self, x, y):
+		False
+		
 	def getIdType(self):
 		return self.Type + str(self.ID)
