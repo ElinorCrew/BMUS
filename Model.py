@@ -11,13 +11,13 @@ class Model:
 		self.elementList = []
 		self.idState = IdState()
 		self.setPointState = False
-		self.responseText = "Welcome to BMUS. Press 'p' to enter set point mode, 'f' to enter set force mode and 'b' to set boundrys."
+		self.responseText = ""
 		
 	def setPoint(self, x, y):
-		self.responseText = "Mode: set new start point"
+		self.responseText = "Mode: set new start point\n"
 		pointB = Point(x, y, self.idState.getPointId())
 		if self.setPointState and (0 != len(self.elementList)):
-			self.responseText = "Mode: set continuation point"
+			self.responseText = "Mode: set continuation point\n"
 			pointA = self.elementList.pop()
 			beamElement = BeamElement(pointA, pointB, self.idState.getBeamId())
 			self.elementList.append(beamElement)
@@ -29,10 +29,10 @@ class Model:
 		self.setPointState = False
 		
 	def setForce(self):
-		self.responseText = "Mode: set force"
+		self.responseText = "Mode: set force\n"
 	
 	def setFixture(self):
-		self.responseText = "Mode: set boundry"
+		self.responseText = "Mode: set boundry\n"
 		
 	def drawElementList(self, canv):
 		for element in self.elementList:

@@ -4,29 +4,30 @@ from Model import Model
 root = Tk()
 model = Model()
 canvas = Canvas(width=800, height=600, bg='white')
-commandLine = Canvas(width=800, height=30, bg='gray')
+commandText = Text(root, width=100, height=1)
+commandText.insert('1.0', "Welcome to BMUS, the interactive truss calculator.")
 
-def drawCanvas(canv, commandLine, model):
+def drawCanvas(canv, model):
+	global commandText
 	canv.delete("all")
-	commandLine.delete("all")
 	model.drawElementList(canv)
-	commandLine.create_text(400, 15, text=model.responseText)
+	commandText.insert('1.0', model.responseText)
 
 def setPoint(event):
 	model.setPoint(event.x, event.y)
-	drawCanvas(canvas, commandLine, model)
+	drawCanvas(canvas, model)
 	
 def setForce(event):
 	model.setForce()
-	drawCanvas(canvas, commandLine, model)
+	drawCanvas(canvas, model)
 	
 def setFixture(event):
 	model.setFixture()
-	drawCanvas(canvas, commandLine, model)
+	drawCanvas(canvas, model)
 	
 def endPoint(event):
 	model.endPoint()
-	drawCanvas(canvas, commandLine, model)
+	drawCanvas(canvas, model)
 	
 def calculate(event):
 	endPoint(event)
@@ -40,7 +41,7 @@ canvas.bind("<Button-1>", setPoint)
 canvas.bind("<Button-3>", endPoint)
 
 canvas.pack(expand=YES, fill=BOTH)
-commandLine.create_text(400, 15, text=model.responseText)
-commandLine.pack(expand=YES, fill=BOTH)
+
+commandText.pack(expand=YES, fill=BOTH)
 
 root.mainloop()
