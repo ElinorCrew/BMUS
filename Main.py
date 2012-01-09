@@ -32,11 +32,13 @@ def calculate(event):
 	endPoint(event)
 	model.newCalculation()
 
+root.bind("b", setFixture)
+root.bind("f", setForce)
+root.bind("c", calculate)
+
 canvas.bind("<Button-1>", setPoint)
-canvas.bind("<Button-2>", calculate)
 canvas.bind("<Button-3>", endPoint)
-canvas.bind("<Key-b>", setFixture)
-canvas.bind("<Key-f>", setForce)
+
 canvas.pack(expand=YES, fill=BOTH)
 commandLine.create_text(400, 15, text=model.responseText)
 commandLine.pack(expand=YES, fill=BOTH)

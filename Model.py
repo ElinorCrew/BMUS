@@ -41,7 +41,7 @@ class Model:
 		
 	def newCalculation(self):
 		newCalculation = Calculation(self.calculateIEG(), self.getBeamList(), self.calculateNumVert())
-		#TODO: Get force vector from user adn number of iterations from user..
+		#TODO: Get force vector from user and number of iterations from user..
 		newCalculation.setForceVector(self.getForceVector())
 		newCalculation.calculateDisplacementVector(200)
 		
