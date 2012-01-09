@@ -1,5 +1,5 @@
 from math import *
-
+#simen var her
 def addOneLocalK(globalK, localK, localIEG):
 	localLen = len(localK)
 	localPiv = floor(localLen/2)
