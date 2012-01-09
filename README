@@ -1,0 +1,44 @@
+Updated 2/1-2012
+
+File overiew:
+	Class dependencies:
+		Main.py	->	Model.py	->	IdState.py
+								->	BeamElement.py
+								->	Point.py
+								->	Calculation.py
+
+	Static-type files:
+		MatrixUtil.py
+		TestFrame.py
+		
+	Used modules:
+		Tkinter (GUI framework)
+		math
+		
+	Test files:
+		CalculcatilTest.py
+		MatrixUtilTest.py
+		
+TODO:
+	Global: Add rotation logic for forces and matrices
+	Global: Add SI.unit logic
+	GUI: Add force and degrees of freedom on vertices
+	GUI: Add computation result display in window
+	TEST: Add physical beam system test
+	
+Test info:
+	All test are designed to run in console with python fileTest.py
+	Additional framework methods shoud be placed in TestFrame.py
+	
+Project build info:
+	Run python Main.py in console
+	Tested with python version 2.7 on windows 7 64 bit
+	
+Mechanical methology description:
+	Longer description can be found in Waløen part 2.
+	Calculates local stiffness matrix for every beam element spesified by user.
+	Reduces local stiffness matrices with respect to beam degree of freedom.
+	Combines local stiffness matrices to system matrix using IEG
+	Calculates global force vector spesified by user.
+	Solves system: (system matrix)*(displacement vector) = (force vector) with 
+	respect to displacement vector, using Gauss-Seider iteration.
